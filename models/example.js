@@ -1,7 +1,19 @@
-module.exports = function(sequelize, DataTypes) {
-  var Example = sequelize.define("Example", {
-    text: DataTypes.STRING,
-    description: DataTypes.TEXT
+module.exports = function (sequelize, DataTypes) {
+  var Board = sequelize.define("Board", {
+    switch: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   });
-  return Example;
+  var Users = sequelize.define("Users", {
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  });
+  return Board, Users;
 };
