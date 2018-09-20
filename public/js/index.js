@@ -73,13 +73,11 @@ var handleFormSubmit = function (event) {
     return;
   }
 
-  logIn($exampleText.val().trim(), $exampleDescription.val().trim());
+  //uncomment this to check username and password
+  // logIn($exampleText.val().trim(), $exampleDescription.val().trim());
+
+  //uncomment this to test sign-ups
   // signUp($exampleText.val().trim(), $exampleDescription.val().trim());
-  // API.saveExample(user).then(function() {
-  //   refreshExamples();
-  // });
-  // $exampleText.val("");
-  // $exampleDescription.val("");
 };
 
 function logIn(usernameInput, paaswordInput) {
