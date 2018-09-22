@@ -63,7 +63,6 @@ var refreshExamples = function () {
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function (event) {
   event.preventDefault();
-
   var user = {
     userName: $exampleText.val().trim(),
     password: $exampleDescription.val().trim()
@@ -74,16 +73,54 @@ var handleFormSubmit = function (event) {
     return;
   }
 
-  API.saveExample(user).then(function () {
-    refreshExamples();
-  });
-  $exampleText.val("");
-  $exampleDescription.val("");
+  //uncomment this to check username and password
+  // logIn($exampleText.val().trim(), $exampleDescription.val().trim());
+
+  //uncomment this to test sign-ups
+  // signUp($exampleText.val().trim(), $exampleDescription.val().trim());
 };
 
+function logIn(usernameInput, paaswordInput) {
+  API.getExamples().then(function (data) {
+    var currentUser = data.find(function (usersDB) {
+      if (usersDB.userName === usernameInput && usersDB.password === paaswordInput) {
+        return usersDB;
+      }
+    });
+    console.log(currentUser);
+    if (currentUser === undefined) {
+      alert("username or password is incorrect");
+    } else {
+      alert("welcome back!");
+    }
+  });
+}
+
+function signUp(usernameInput, paaswordInput) {
+  API.getExamples().then(function(data) {
+    var checkUsername = data.find(function(DBusername) {
+      return DBusername.userName === usernameInput;
+    });
+    console.log(checkUsername);
+    if (checkUsername === undefined) {
+      alert("username is avaliable");
+      var user = {
+        userName: usernameInput,
+        password: paaswordInput
+      };
+      API.saveExample(user).then(function() {
+        refreshExamples();
+      });
+      $exampleText.val("");
+      $exampleDescription.val("");
+    } else {
+      alert("username is taken");
+    }
+  });
+}
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function () {
+var handleDeleteBtnClick = function() {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
