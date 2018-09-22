@@ -11,6 +11,7 @@ board.on("ready", function() {
     var led = new five.Led(11);
     var rmSwitch = new five.Switch(8);
 
+
     rmSwitch.on("open", function() {
         fnLedOn(); 
 
@@ -59,4 +60,5 @@ module.exports = {
     isLedOn: function() { return isLedOn; },
    isSwitchOn: function(){ return isSwitchOn; }, 
 };
+
 
