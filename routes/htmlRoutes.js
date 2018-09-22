@@ -1,5 +1,5 @@
 var db = require("../models");
-var ard = require("../arduino/arduino.js"); 
+
 
 
 module.exports = function(app) {

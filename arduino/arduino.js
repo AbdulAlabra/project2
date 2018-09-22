@@ -1,32 +1,62 @@
-
 var five = require("johnny-five");
 var board = new five.Board();
-var isLeadOn;
+var isLedOn;
+var isSwitchOn; 
 
-board.on("ready", function () {
+        isLedOn = true;
+        isSwitchOn = true; 
+
+board.on("ready", function() {
 
     var led = new five.Led(11);
-    var rmSwitch = new five.Switch(8); 
+    var rmSwitch = new five.Switch(8);
 
-    rmSwitch.on("open",function(){
-        
-        isLeadOn = true; 
-        //console.log(isLeadOn)
-        
-        led.on(); 
-        return isLeadOn; 
+    rmSwitch.on("open", function() {
+        fnLedOn(); 
+
+        // isLedOn = true;
+        // isSwitchOn = true; 
+        // //console.log(isLeadOn)
+
+        // led.on();
+        // return isLedOn;
     })
 
-    rmSwitch.on("close",function(){
-        isLeadOn = false; 
-        led.off();
-        // console.log(isLeadOn)
+    rmSwitch.on("close", function() {
+        fnLedOff(); 
+        
+        // isLedOn = false;
+        // led.off();
+        // // console.log(isLeadOn)
     })
+
+    if (isSwitchOn == true && isLedOn == false){
+        fnLedOn(); 
+    }
+
+    if (isSwitchOn == false && isLedOn == true){
+        fnLedOff(); 
+    }
+
     
-}); 
+
+
+
+});
+
+
+function fnLedOn(){ 
+    led.on(); 
+    isLedOn = true; 
+}
+
+function fnLedOff(){
+    led.off(); 
+    isLedOn = false; 
+}
 
 module.exports = {
-    isLeadOn: function (){ return isLeadOn; },
-    //isSomethingElse: function() { return true; }
+    isLedOn: function() { return isLedOn; },
+   isSwitchOn: function(){ return isSwitchOn; }, 
 };
 
