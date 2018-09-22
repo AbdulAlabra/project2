@@ -1,7 +1,31 @@
 var db = require("../models");
+var ard = require("../arduino/arduino.js"); 
+
+
+console.log(ard.isLedOn()); 
+console.log(ard.isSwitchOn());
+
+
+var ard = {
+  led: ard.isLedOn(),
+  switcher: ard.isSwitchOn()
+}; 
 
 module.exports = function(app) {
   // Get all examples
+
+app.get("/api/arduino", function(req, res){
+
+  res(ardCom); 
+
+  
+
+}))
+
+app.post("/api/arduino", function(req, res){
+  
+})
+
   app.get("/api/examples", function(req, res) {
     db.Users.findAll({}).then(function(dbExamples) {
       res.json(dbExamples);
@@ -22,3 +46,5 @@ module.exports = function(app) {
     });
   });
 };
+
+
