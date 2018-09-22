@@ -1,30 +1,27 @@
 var db = require("../models");
-var ard = require("../arduino/arduino.js"); 
+var ard = require("../arduino/arduino.js");
 
-
-console.log(ard.isLedOn()); 
+console.log(ard.isLedOn());
 console.log(ard.isSwitchOn());
 
-
-var ard = {
+var ardCom = {
   led: ard.isLedOn(),
   switcher: ard.isSwitchOn()
-}; 
+};
 
 module.exports = function(app) {
-  // Get all examples
+  // Get all changes
+  app.get("/api/arduino", function(req, res) {
+    //send updated ardCom.led status
+    res(ardCom.switcher);
+  });
 
-app.get("/api/arduino", function(req, res){
-
-  res(ardCom); 
-
-  
-
-}))
-
-app.post("/api/arduino", function(req, res){
-  
-})
+  app.post("/api/arduino", function(req, res) {
+    //send led status
+    req.body(ardCom.led);
+    //get led status
+    res(ardCom.led);
+  });
 
   app.get("/api/examples", function(req, res) {
     db.Users.findAll({}).then(function(dbExamples) {
@@ -46,5 +43,3 @@ app.post("/api/arduino", function(req, res){
     });
   });
 };
-
-
