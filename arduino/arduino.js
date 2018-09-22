@@ -9,9 +9,15 @@ isSwitchOn = true;
 board.on("ready", function() {
   var led = new five.Led(11);
   var rmSwitch = new five.Switch(8);
+  var temp = new five.Thermometer("A0");
+
+//   temp.on("change", function() {
+//     console.log(this);
+//   });
 
   rmSwitch.on("open", function() {
     fnLedOn();
+    console.log("switch pressed");
 
     // isLedOn = true;
     // isSwitchOn = true;
@@ -39,6 +45,7 @@ board.on("ready", function() {
   function fnLedOn() {
     led.on();
     isLedOn = true;
+    console.log("led on");
   }
 
   function fnLedOff() {
