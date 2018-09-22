@@ -13,7 +13,8 @@ module.exports = function(app) {
   // Get all changes
   app.get("/api/arduino", function(req, res) {
     //send updated ardCom.led status
-    res(ardCom.switcher);
+    console.log(ardCom.switcher);
+    //res(ardCom.switcher);
   });
 
   app.post("/api/arduino", function(req, res) {

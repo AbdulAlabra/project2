@@ -2,7 +2,7 @@ var five = require("johnny-five");
 var board = new five.Board();
 var isLedOn;
 var isSwitchOn;
-
+var tempVal;
 isLedOn = true;
 isSwitchOn = true;
 
@@ -11,9 +11,12 @@ board.on("ready", function() {
   var rmSwitch = new five.Switch(8);
   var temp = new five.Thermometer("A0");
 
-//   temp.on("change", function() {
-//     console.log(this);
-//   });
+  setInterval(function() {
+    temp.on("change", function() {
+      console.log("celsius: %d", this.C * (10 / 100));
+      tempVal = this.C * (10 / 100);
+    });
+  }, 2000);
 
   rmSwitch.on("open", function() {
     fnLedOn();
