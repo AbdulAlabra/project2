@@ -19,7 +19,8 @@
   </div>
   <button id="on" class="btn btn-primary float-right">On</button>
   <button id="off" class="btn btn-primary float-right">Off</button>
-    {{!-- <button id="blink" class="btn btn-primary float-right">blink</button> --}}
+  {{!--
+  <button id="blink" class="btn btn-primary float-right">blink</button> --}}
 
 
 </div>
@@ -31,22 +32,34 @@
       url: "/api/arduino",
       type: "POST",
       data: { status: "on" }
+    }).then(function (response) {
+      {{!-- console.log(response); --}}
     });
   });
 
   $("#off").on("click", function () {
+
     $.ajax({
       url: "/api/arduino",
       type: "POST",
       data: { status: "off" }
+    }).then(function (response) {
+      {{!-- console.log(response); --}}
     });
+
+
   });
-   $("#blink").on("click", function () {
+
+  function update() {
     $.ajax({
-      url: "/api/arduino",
-      type: "POST",
-      data: { status: "blink" }
+      url: "/api/ard/hardware",
+      type: "GET"
+    }).then(function (response) {
+      console.log(response); 
     });
-  });
+  }
+  setInterval(function () {
+    update();
+  },100);
 
 </script>
