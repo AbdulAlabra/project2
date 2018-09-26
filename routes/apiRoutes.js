@@ -1,46 +1,65 @@
 var db = require("../models");
 var five = require("johnny-five");
+var board = new five.Board();
 module.exports = function (app) {
-  app.get("/api/arduino", function (req, res){
+
+  app.get("/api/arduino", function (req, res) {
   });
-  var board = new five.Board();
-  board.on("ready", function() {
-    var islightOn = undefined;
+
+  var islightOn = undefined;
+  board.on("ready", function () {
     console.log("I'm inside ready");
     var led = new five.Led(11);
     var rmSwitch = new five.Switch(8);
-    app.post("/api/arduino", function(req, res) {
+
+    app.post("/api/arduino", function (req, res) {
       console.log("I'm inside api route");
       if (req.body.status === "on") {
         islightOn = true;
         console.log("on web");
         led.on();
-        res.send("on");
-      } else if (req.body.status === "off") {
+        res.send(islightOn);
+      }
+      else if (req.body.status === "off") {
         islightOn = false;
         console.log("off web");
         led.off();
-        res.send("off");
+        res.send(islightOn);
       }
+      console.log("is light on? : " + islightOn);
     });
-    rmSwitch.on("open", function() {
-      if(islightOn === true) {
+
+    rmSwitch.on("open", function () {
+      if (islightOn === true) {
         led.off();
+        islightOn = false;
       } else {
         led.on();
         islightOn = true;
       }
+      console.log("----------------------------");
       console.log("Hardware: Im open");
+      console.log("is light on? : " + islightOn);
     });
-    rmSwitch.on("close", function() {
+
+    rmSwitch.on("close", function () {
       if (islightOn === false) {
         led.on();
+        islightOn = true;
       } else {
         led.off();
-        islightOn= false;
+        islightOn = false;
       }
+      console.log("----------------------------");
       console.log("Hardware: Im close");
+      console.log("is light on? : " + islightOn);
     });
+    console.log("helllllooooooooo");
+  }); // end of board
+
+  app.get("/api/ard/hardware", function (req, res) {
+    console.log("helllllooooooooo");
+    res.send(islightOn);
   });
 
   app.get("/api/examples", function (req, res) {
