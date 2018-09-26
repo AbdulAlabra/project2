@@ -11,50 +11,54 @@ board.on("ready", function() {
   var rmSwitch = new five.Switch(8);
   var temp = new five.Thermometer("A0");
 
-  setInterval(function() {
-    temp.on("change", function() {
-      console.log("celsius: %d", this.C * (10 / 100));
-      tempVal = this.C * (10 / 100);
-    });
-  }, 2000);
+  // setInterval(function() {
+  //   temp.on("change", function() {
+  //     console.log("celsius: %d", this.C * (10 / 100));
+  //     tempVal = this.C * (10 / 100);
+  //   });
+  // }, 2000);
 
   rmSwitch.on("open", function() {
-    fnLedOn();
     console.log("switch pressed");
 
     // isLedOn = true;
     // isSwitchOn = true;
     // //console.log(isLeadOn)
 
-    // led.on();
+    led.on();
     // return isLedOn;})
   });
 
   rmSwitch.on("close", function() {
-    fnLedOff();
     // isLedOn = false;
-    // led.off();
+    led.off();
     // // console.log(isLeadOn)
   });
 
-  if (isSwitchOn === true && isLedOn === false) {
-    fnLedOn();
-  }
+  // if (isSwitchOn === true && isLedOn === false) {
+  //   fnLedOn();
+  // }
 
-  if (isSwitchOn === false && isLedOn === true) {
-    fnLedOff();
-  }
+  // if (isSwitchOn === false && isLedOn === true) {
+  //   fnLedOff();
+  // }
 
-  function fnLedOn() {
-    led.on();
-    isLedOn = true;
-    console.log("led on");
-  }
 
-  function fnLedOff() {
-    led.off();
-    isLedOn = false;
-  }
+
+  function fnLedOnOff(input) {
+    if (input === true) {
+      led.on();
+      isLedOn = true;
+      console.log("led on");
+    }
+    else {
+      led.off();
+      isLedOn = false;
+      console.log("led off");
+    }
+  };
+
+
 });
 
 module.exports = {
@@ -63,5 +67,8 @@ module.exports = {
   },
   isSwitchOn: function() {
     return isSwitchOn;
+  },
+  ledOnOff: function(input) {
+     fnLedOnOff(); 
   }
-};
+}

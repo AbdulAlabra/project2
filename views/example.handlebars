@@ -17,3 +17,24 @@
     </div>
   </div>
 </div>
+  </div>
+  <button id="light" class="btn btn-primary float-right">Submit</button>
+
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script>
+  var btnStatus;
+  $("#light").on("click", function () {
+    btnStatus = true;
+      $.ajax({
+        url: "/api/arduino",
+        type: "POST",
+        data: { status: btnStatus }
+      }).then(function (req) {
+
+        console.log(response);
+      });
+  });
+</script>

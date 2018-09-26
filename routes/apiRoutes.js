@@ -19,7 +19,8 @@ module.exports = function(app) {
 
   app.post("/api/arduino", function(req, res) {
     //send led status
-    req.body(ardCom.led);
+    var btnSwitch = req.body.status;
+    ard.ledOnOff(btnSwitch);
     //get led status
     res(ardCom.led);
   });
