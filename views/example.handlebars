@@ -7,13 +7,46 @@
           <p>
             <strong>ID</strong>: {{example.id}}</p>
           <p>
-          <p>
-            <strong>Text</strong>: {{example.text}}</p>
-          <p>
-            <strong>Description:</strong> {{example.description}}</p>
+            <p>
+              <strong>Text</strong>: {{example.text}}</p>
+            <p>
+              <strong>Description:</strong> {{example.description}}</p>
             <a href="/">← Back To Home</a>
+
         </div>
       </div>
     </div>
   </div>
+  <button id="on" class="btn btn-primary float-right">On</button>
+  <button id="off" class="btn btn-primary float-right">Off</button>
+    {{!-- <button id="blink" class="btn btn-primary float-right">blink</button> --}}
+
+
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+  $("#on").on("click", function () {
+    $.ajax({
+      url: "/api/arduino",
+      type: "POST",
+      data: { status: "on" }
+    });
+  });
+
+  $("#off").on("click", function () {
+    $.ajax({
+      url: "/api/arduino",
+      type: "POST",
+      data: { status: "off" }
+    });
+  });
+   $("#blink").on("click", function () {
+    $.ajax({
+      url: "/api/arduino",
+      type: "POST",
+      data: { status: "blink" }
+    });
+  });
+
+</script>
