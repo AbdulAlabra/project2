@@ -8,12 +8,10 @@ module.exports = function (app) {
 
   var islightOn = undefined;
   board.on("ready", function () {
-    console.log("I'm inside ready");
     var led = new five.Led(11);
     var rmSwitch = new five.Switch(8);
 
     app.post("/api/arduino", function (req, res) {
-      console.log("I'm inside api route");
       if (req.body.status === "on") {
         islightOn = true;
         console.log("on web");
@@ -22,7 +20,6 @@ module.exports = function (app) {
       }
       else if (req.body.status === "off") {
         islightOn = false;
-        console.log("off web");
         led.off();
         res.send(islightOn);
       }
@@ -37,8 +34,6 @@ module.exports = function (app) {
         led.on();
         islightOn = true;
       }
-      console.log("----------------------------");
-      console.log("Hardware: Im open");
       console.log("is light on? : " + islightOn);
     });
 
