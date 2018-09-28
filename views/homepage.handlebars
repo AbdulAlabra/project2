@@ -65,7 +65,6 @@
       type: "POST",
       data: { status: "on" }
     }).then(function (response) {
-      {{!-- console.log(response); --}}
     });
   });
 
@@ -76,22 +75,10 @@
       type: "POST",
       data: { status: "off" }
     }).then(function (response) {
-      {{!-- console.log(response); --}}
     });
-
-
   });
 
-  function update() {
-    $.ajax({
-      url: "/api/ard/hardware",
-      type: "GET"
-    }).then(function (response) {
-      console.log(response); 
-    });
-  }
-  {{!-- setInterval(function () {
-    update();
-  },100); --}}
+  
+
 
 </script>

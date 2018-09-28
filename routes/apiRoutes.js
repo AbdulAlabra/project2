@@ -34,6 +34,8 @@ module.exports = function (app) {
         led.on();
         islightOn = true;
       }
+      console.log("----------------------------");
+      console.log("Hardware: Im open");
       console.log("is light on? : " + islightOn);
     });
 
@@ -49,11 +51,9 @@ module.exports = function (app) {
       console.log("Hardware: Im close");
       console.log("is light on? : " + islightOn);
     });
-    console.log("helllllooooooooo");
   }); // end of board
 
   app.get("/api/ard/hardware", function (req, res) {
-    console.log("helllllooooooooo");
     res.send(islightOn);
   });
 

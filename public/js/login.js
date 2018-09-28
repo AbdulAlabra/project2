@@ -59,7 +59,7 @@ function logIn(usernameInput, paaswordInput) {
       alert("username or password is incorrect");
     } else {
       window.location.replace("http://localhost:3000/homepage");
-      alert("welcome back!");
+      
     }
   });
 }
