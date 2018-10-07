@@ -58,7 +58,7 @@ function logIn(usernameInput, paaswordInput) {
     if (currentUser === undefined) {
       alert("username or password is incorrect");
     } else {
-      window.location.replace("http://localhost:3000/homepage");
+      window.location.replace("https://shrouded-bayou-16790.herokuapp.com/homepage");
       
     }
   });
